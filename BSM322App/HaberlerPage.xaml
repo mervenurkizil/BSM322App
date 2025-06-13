@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BSM322App.HaberlerPage"
+             Title="Haberler">
+    <Grid BackgroundColor="{AppThemeBinding Light=White, Dark=#1a1a1a}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Kategori Seçimi -->
+        <Frame Grid.Row="0" BackgroundColor="{AppThemeBinding Light=#f0f0f0, Dark=#2a2a2a}" 
+               CornerRadius="0" HasShadow="True" Margin="0,0,0,5">
+            <Picker x:Name="CategoryPicker" Title="Kategori Seçin" 
+                    BackgroundColor="Transparent"
+                    TextColor="{AppThemeBinding Light=Black, Dark=White}"
+                    TitleColor="{AppThemeBinding Light=Gray, Dark=LightGray}"
+                    FontSize="16"
+                    SelectedIndexChanged="OnCategoryChanged">
+                <Picker.Items>
+                    <x:String>Manşet</x:String>
+                    <x:String>Son Dakika</x:String>
+                    <x:String>Gündem</x:String>
+                    <x:String>Ekonomi</x:String>
+                    <x:String>Spor</x:String>
+                </Picker.Items>
+            </Picker>
+        </Frame>
+
+        <!-- Haber Listesi -->
+        <RefreshView Grid.Row="1" x:Name="RefreshView" 
+                     Command="{Binding RefreshCommand}" 
+                     IsRefreshing="{Binding IsRefreshing}">
+            <CollectionView x:Name="HaberlerCollectionView" 
+                           ItemsSource="{Binding Haberler}"
+                           BackgroundColor="Transparent">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BackgroundColor="{AppThemeBinding Light=White, Dark=#2a2a2a}" 
+                               CornerRadius="12" 
+                               Margin="15,8" 
+                               Padding="15"
+                               HasShadow="True">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <!-- Haber Başlığı -->
+                                <Label Grid.Row="0" Text="{Binding Title}" 
+                                       FontAttributes="Bold" 
+                                       FontSize="17" 
+                                       TextColor="{AppThemeBinding Light=#1a1a1a, Dark=White}" 
+                                       LineBreakMode="WordWrap"
+                                       Margin="0,0,0,8"/>
+
+                                <!-- Haber Açıklaması -->
+                                <Label Grid.Row="1" Text="{Binding CleanDescription}" 
+                                       FontSize="14" 
+                                       TextColor="{AppThemeBinding Light=#666666, Dark=#cccccc}" 
+                                       LineBreakMode="WordWrap" 
+                                       MaxLines="3"
+                                       Margin="0,0,0,8"/>
+
+                                <!-- Tarih -->
+                                <Label Grid.Row="2" Text="{Binding PubDate}" 
+                                       FontSize="12" 
+                                       TextColor="{AppThemeBinding Light=#2196F3, Dark=#64B5F6}"
+                                       FontAttributes="Italic"/>
+
+                                <!-- Ayıraç çizgisi -->
+                                <BoxView Grid.Row="3" 
+                                        BackgroundColor="{AppThemeBinding Light=#e0e0e0, Dark=#404040}" 
+                                        HeightRequest="1" 
+                                        Margin="0,8,0,0"/>
+                            </Grid>
+
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={x:Reference HaberlerCollectionView}, Path=BindingContext.HaberTapCommand}" 
+                                                     CommandParameter="{Binding}"/>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+                <!-- Boş liste mesajı -->
+                <CollectionView.EmptyView>
+                    <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Padding="20">
+                        <Label Text="📰" FontSize="48" HorizontalOptions="Center"/>
+                        <Label Text="Henüz haber yüklenir..." 
+                               FontSize="16" 
+                               TextColor="{AppThemeBinding Light=Gray, Dark=LightGray}"
+                               HorizontalOptions="Center"
+                               Margin="0,10,0,0"/>
+                        <Label Text="Lütfen kategori seçin ve bekleyin" 
+                               FontSize="14" 
+                               TextColor="{AppThemeBinding Light=Gray, Dark=LightGray}"
+                               HorizontalOptions="Center"/>
+                    </StackLayout>
+                </CollectionView.EmptyView>
+            </CollectionView>
+        </RefreshView>
+
+        <!-- Loading Indicator -->
+        <Grid Grid.Row="1" IsVisible="{Binding Source={x:Reference LoadingIndicator}, Path=IsVisible}"
+              BackgroundColor="{AppThemeBinding Light=#80FFFFFF, Dark=#80000000}">
+            <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                <ActivityIndicator x:Name="LoadingIndicator" 
+                                  IsVisible="False" 
+                                  IsRunning="False" 
+                                  Color="#2196F3" 
+                                  Scale="1.5"/>
+                <Label Text="Haberler yükleniyor..." 
+                       FontSize="16" 
+                       TextColor="{AppThemeBinding Light=#2196F3, Dark=#64B5F6}"
+                       HorizontalOptions="Center"
+                       Margin="0,10,0,0"/>
+            </StackLayout>
+        </Grid>
+    </Grid>
+</ContentPage>

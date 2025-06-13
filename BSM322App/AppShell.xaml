@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="BSM322App.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:BSM322App"
+    Shell.FlyoutBehavior="Flyout">
+
+
+    <!-- Kayıt Sayfası -->
+    <ShellContent
+   
+   Shell.FlyoutBehavior="Disabled"
+   ContentTemplate="{DataTemplate local:RegisterPage}"
+   Route="register" />
+
+    <!-- Giriş Sayfası -->
+    <ShellContent
+     Route="login"
+     Shell.FlyoutBehavior="Disabled"
+     ContentTemplate="{DataTemplate local:LoginPage}" />
+
+    <!-- Ana Sayfa -->
+    <ShellContent
+        Title="Ana Sayfa"
+        Route="main"
+        ContentTemplate="{DataTemplate local:MainPage}" />
+
+    <!-- Kurlar -->
+    <ShellContent
+        Title="Kurlar"
+        Icon="kurlar.png"
+        ContentTemplate="{DataTemplate local:KurlarPage}"
+        Route="kurlar" />
+
+    <!-- Haberler -->
+    <ShellContent
+        Title="Haberler"
+        Icon="haberler.png"
+        ContentTemplate="{DataTemplate local:HaberlerPage}"
+        Route="haberler" />
+
+    <!-- Hava Durumu -->
+    <ShellContent
+        Title="Hava Durumu"
+        Icon="hava.png"
+        ContentTemplate="{DataTemplate local:HavaDurumuPage}"
+        Route="hava" />
+
+    <!-- Yapılacaklar -->
+    <ShellContent
+        Title="Yapılacaklar"
+        Icon="yapilacaklar.png"
+        ContentTemplate="{DataTemplate local:YapilacaklarPage}"
+        Route="yapilacaklar" />
+
+    <!-- Ayarlar -->
+    <ShellContent
+        Title="Ayarlar"
+        Icon="ayarlar.png"
+        ContentTemplate="{DataTemplate local:AyarlarPage}"
+        Route="ayarlar" />
+
+
+   
+
+
+</Shell>

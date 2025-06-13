@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BSM322App.KurlarPage"
+             Title="Güncel Kurlar">
+
+    <Grid BackgroundColor="{AppThemeBinding Light=White, Dark=#1a1a1a}">
+        <ScrollView>
+            <StackLayout Padding="10">
+                
+
+                <Button Grid.Column="1" Text="🔄" BackgroundColor="Transparent" TextColor="White" 
+       FontSize="16" Clicked="OnUpdateClicked" WidthRequest="70" HeightRequest="70"/>
+                
+                <!-- Table Header -->
+                <Grid BackgroundColor="#E8EAF6" Padding="10,8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="40"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Text="Tür" FontAttributes="Bold" FontSize="12" TextColor="#673AB7"/>
+                    <Label Grid.Column="1" Text="Alış" FontAttributes="Bold" FontSize="12" TextColor="#673AB7" HorizontalTextAlignment="Center"/>
+                    <Label Grid.Column="2" Text="Satış" FontAttributes="Bold" FontSize="12" TextColor="#673AB7" HorizontalTextAlignment="Center"/>
+                    <Label Grid.Column="3" Text="Fark" FontAttributes="Bold" FontSize="12" TextColor="#673AB7" HorizontalTextAlignment="Center"/>
+                    <Label Grid.Column="4" Text="Yön" FontAttributes="Bold" FontSize="12" TextColor="#673AB7" HorizontalTextAlignment="Center"/>
+                </Grid>
+
+                <!-- Currency List -->
+                <CollectionView x:Name="KurlarCollectionView" ItemsSource="{Binding Kurlar}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid BackgroundColor="{AppThemeBinding Light=White, Dark=#2a2a2a}" Padding="10,8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="60"/>
+                                    <ColumnDefinition Width="40"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Separator line -->
+                                <BoxView Grid.ColumnSpan="5" BackgroundColor="#E0E0E0" HeightRequest="1" VerticalOptions="End"/>
+
+                                <Label Grid.Column="0" Text="{Binding Name}" FontSize="12" 
+                                       TextColor="{AppThemeBinding Light=#FF9800, Dark=#FFB74D}" VerticalOptions="Center"/>
+
+                                <Label Grid.Column="1" Text="{Binding Buying, StringFormat='{0:F4}'}" FontSize="12" 
+                                       TextColor="{AppThemeBinding Light=Black, Dark=White}" HorizontalTextAlignment="Center" VerticalOptions="Center"/>
+
+                                <Label Grid.Column="2" Text="{Binding Selling, StringFormat='{0:F4}'}" FontSize="12" 
+                                       TextColor="{AppThemeBinding Light=Black, Dark=White}" HorizontalTextAlignment="Center" VerticalOptions="Center"/>
+
+                                <Label Grid.Column="3" Text="{Binding ChangePercent, StringFormat='{0:F2}'}" FontSize="12" 
+                                       TextColor="{Binding ChangeColor}" HorizontalTextAlignment="Center" VerticalOptions="Center"/>
+
+                                <Label Grid.Column="4" Text="{Binding ChangeSymbol}" FontSize="12" 
+                                       TextColor="{Binding ChangeColor}" HorizontalTextAlignment="Center" VerticalOptions="Center"/>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+        </ScrollView>
+
+        <!-- Loading Indicator -->
+        <ActivityIndicator x:Name="LoadingIndicator" IsVisible="False" IsRunning="False" 
+                          Color="#673AB7" VerticalOptions="Center" HorizontalOptions="Center"/>
+    </Grid>
+</ContentPage>

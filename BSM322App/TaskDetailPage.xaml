@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BSM322App.TaskDetailPage"
+             Title="Görev Detayı">
+    <ScrollView BackgroundColor="{AppThemeBinding Light=White, Dark=#1a1a1a}">
+        <StackLayout Padding="20" Spacing="20">
+            <Frame BackgroundColor="{AppThemeBinding Light=#f8f8f8, Dark=#2a2a2a}" 
+                   CornerRadius="15" Padding="20">
+                <StackLayout Spacing="15">
+                    <Label Text="Başlık" TextColor="{AppThemeBinding Light=Black, Dark=White}"/>
+                    <Entry x:Name="TitleEntry" Placeholder="Görev başlığı" 
+                           BackgroundColor="{AppThemeBinding Light=White, Dark=#3a3a3a}"
+                           TextColor="{AppThemeBinding Light=Black, Dark=White}"/>
+
+                    <Label Text="Açıklama" TextColor="{AppThemeBinding Light=Black, Dark=White}"/>
+                    <Editor x:Name="DescriptionEditor" Placeholder="Görev açıklaması" 
+                           HeightRequest="100" BackgroundColor="{AppThemeBinding Light=White, Dark=#3a3a3a}"
+                           TextColor="{AppThemeBinding Light=Black, Dark=White}"/>
+
+                    <Label Text="Tarih" TextColor="{AppThemeBinding Light=Black, Dark=White}"/>
+                    <DatePicker x:Name="TaskDatePicker" 
+                               BackgroundColor="{AppThemeBinding Light=White, Dark=#3a3a3a}"
+                               TextColor="{AppThemeBinding Light=Black, Dark=White}"/>
+
+                    <Label Text="Saat" TextColor="{AppThemeBinding Light=Black, Dark=White}"/>
+                    <TimePicker x:Name="TaskTimePicker" 
+                               BackgroundColor="{AppThemeBinding Light=White, Dark=#3a3a3a}"
+                               TextColor="{AppThemeBinding Light=Black, Dark=White}"/>
+
+                    <StackLayout Orientation="Horizontal">
+                        <CheckBox x:Name="CompletedCheckBox"/>
+                        <Label Text="Tamamlandı" VerticalOptions="Center" 
+                               TextColor="{AppThemeBinding Light=Black, Dark=White}"/>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+
+            <Button Text="Kaydet" BackgroundColor="#4CAF50" TextColor="White" 
+                    CornerRadius="10" HeightRequest="50" Clicked="OnSaveClicked"/>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

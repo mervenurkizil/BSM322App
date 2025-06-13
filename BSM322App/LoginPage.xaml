@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BSM322App.LoginPage"
+             Title="Giriş Yap">
+    <ScrollView BackgroundColor="{AppThemeBinding Light=White, Dark=#1a1a1a}">
+        <StackLayout Padding="30" Spacing="20">
+            <Label Text="BSM322 Uygulaması" FontSize="28" FontAttributes="Bold" 
+                   HorizontalOptions="Center" TextColor="{AppThemeBinding Light=Black, Dark=White}" Margin="0,50,0,30"/>
+
+            <Frame BackgroundColor="{AppThemeBinding Light=#f8f8f8, Dark=#2a2a2a}" 
+                   CornerRadius="15" Padding="20">
+                <StackLayout Spacing="15">
+                    <Label Text="Email" TextColor="{AppThemeBinding Light=Black, Dark=White}"/>
+                    <Entry x:Name="EmailEntry" Placeholder="Email adresinizi girin" 
+                           Keyboard="Email" BackgroundColor="{AppThemeBinding Light=White, Dark=#3a3a3a}"
+                           TextColor="{AppThemeBinding Light=Black, Dark=White}" PlaceholderColor="Gray"/>
+
+                    <Label Text="Şifre" TextColor="{AppThemeBinding Light=Black, Dark=White}"/>
+                    <Entry x:Name="PasswordEntry" Placeholder="Şifrenizi girin" 
+                           IsPassword="True" BackgroundColor="{AppThemeBinding Light=White, Dark=#3a3a3a}"
+                           TextColor="{AppThemeBinding Light=Black, Dark=White}" PlaceholderColor="Gray"/>
+                </StackLayout>
+            </Frame>
+
+            <Button Text="Giriş Yap" BackgroundColor="#4CAF50" TextColor="White" 
+                    CornerRadius="10" HeightRequest="50" Clicked="OnLoginClicked"/>
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0,20,0,0">
+                <Label Text="Hesabınız yok mu?" TextColor="{AppThemeBinding Light=Gray, Dark=LightGray}" 
+                       VerticalOptions="Center"/>
+                <Button Text="Kayıt Ol" BackgroundColor="Transparent" TextColor="#2196F3" 
+                        FontAttributes="Bold" Clicked="OnGoToRegisterClicked"/>
+            </StackLayout>
+
+            <ActivityIndicator x:Name="LoadingIndicator" IsVisible="False" IsRunning="False" Color="#4CAF50"/>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
