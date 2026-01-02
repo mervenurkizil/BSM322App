@@ -12,7 +12,7 @@ namespace BSM322App
         public RegisterPage()
         {
             InitializeComponent();
-            _authProvider = new FirebaseAuthProvider(new FirebaseConfig("AIzaSyAVJQFkTc0W5tHbyJqxq003MPUlwqXBU1w"));
+            _authProvider = new FirebaseAuthProvider(new FirebaseConfig(""));
             _firebaseClient = new FirebaseClient("https://bsm322app-81914-default-rtdb.firebaseio.com/");
         }
 
